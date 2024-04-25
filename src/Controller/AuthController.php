@@ -5,9 +5,11 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class AuthController extends AbstractController
 {
+    #[Route('/login', name: 'login')]
     public function login(Request $request): Response
     {
         // Check if the form is submitted
@@ -30,7 +32,7 @@ class AuthController extends AbstractController
 
         return $this->render('login.html.twig');
     }
-
+    #[Route('/logout', name: 'logout')]
     public function logout(Request $request): Response
     {
         // Clear session variables

@@ -7,15 +7,15 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    {% if session.username %}
-                    <a class="nav-link" href="/post">Rent your House</a>
+                    {% if app.session.get('username') %}
+                    <a class="nav-link" href="{{ path('post') }}">Rent your House</a>
                     {% else %}
-                <a class="nav-link" href="/login">Rent your House</a>
+                <a class="nav-link" href="{{ path('login') }}">Rent your House</a>
                     {% endif %}
                 </li>
-                {% if session.role == "admin" %}
+                {% if app.session.get('role') == "admin" %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin">Admin Dashboard</a>
+                    <a class="nav-link" href="{{ path('admin') }}">Admin Dashboard</a>
                 </li>
                 {% endif %}
                 <li class="nav-item">
@@ -23,7 +23,7 @@
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
-                {% if session.user %}
+                {% if app.session.get('user') %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('logout') }}">Logout</a>
                     </li>
