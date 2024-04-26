@@ -10,12 +10,12 @@
                     {% if app.session.get('username') is defined %}
                     <a class="nav-link" href="/post">Rent your House</a>
                     {% else %}
-                <a class="nav-link" href="/login">Rent your House</a>
+                <a class="nav-link" href="{{ path('login') }}">Rent your House</a>
                     {% endif %}
                 </li>
                 {% if app.session.get('role') == "admin" %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin">Admin Dashboard</a>
+                    <a class="nav-link" href="{{ path('admin') }}">Admin Dashboard</a>
                 </li>
                 {% endif %}
                 <li class="nav-item">

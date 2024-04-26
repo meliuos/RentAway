@@ -14,11 +14,14 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /*
      * @Route("/", name="HomeController")
-     */ 
+*/
 
 class HomeController extends AbstractController{
-    public function index(SessionInterface $session){
+    public function index(SessionInterface $session): Response
+    {
         $session->start();
-        return $this->render('navbar.html.twig',['session'=>$session]);
+        return $this->render('navbar.html.twig',[
+            'session' => $session
+        ]);
     }
 }
