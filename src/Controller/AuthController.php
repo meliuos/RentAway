@@ -34,7 +34,7 @@ class AuthController extends AbstractController
                 $this->addFlash('error', 'Invalid email or password.');
             }
         }
-        $this->addFlash('error', 'Post');
+        $this->addFlash('info', 'entrer vos informations de connexion');
         return $this->render('login.html.twig');
     }
     
