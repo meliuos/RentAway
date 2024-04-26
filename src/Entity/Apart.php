@@ -6,6 +6,7 @@ use App\Repository\ApartRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: ApartRepository::class)]
+#[ORM\Table(name: 'apparts')]
 class Apart
 {
     #[ORM\Id]

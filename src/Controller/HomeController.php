@@ -19,7 +19,6 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class HomeController extends AbstractController{
     public function index(SessionInterface $session){
         $session->start();
-
         return $this->render('navbar.html.twig',['session'=>$session]);
     }
 }
