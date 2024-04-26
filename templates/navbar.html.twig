@@ -1,34 +1,44 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
     <div class="container-fluid">
         <a class="navbar-brand nav-logo" href="#">RentAway</a>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
+        <button
+                class="navbar-toggler"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+        ><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item">
                     {% if app.session.get('username') %}
-                    <a class="nav-link" href="/post">Rent your House</a>
+                    <a class="nav-link mx-2" href="/post">Rent your house</a>
                     {% else %}
-                <a class="nav-link" href={{ path('login') }}>Rent your House</a>
+                    <a class="nav-link mx-2" href={{ path('login') }}>Rent your house</a>
                     {% endif %}
                 </li>
-                {% if app.session.get('admin') == "1" %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('admin') }}">Admin Dashboard</a>
+                    {% if app.session.get('admin') == "1" %}
+                    <a class="nav-link mx-2" href="{{ path('admin') }}">Admin Dashboard</a>
+                    {% endif %}
                 </li>
-                {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{path("edit")}}">Manage your posts</a>
+                    <a class="nav-link mx-2" href="{{path("edit")}}">Manage your posts</a>
                 </li>
-            </ul>
-            <ul class="navbar-nav ms-auto">
+
                 {% if app.session.get('username') %}
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('logout') }}">Logout</a>
-                    </li>
+                <li class="nav-item ms-3">
+                    <a class="btn btn-black btn-rounded" href="{{ path('logout') }}">Logout</a>
+                </li>
                 {% else %}
-                    <li class="nav-item">
-                        <a class="nav-link" href={{ path('login') }}>Login</a>
-                         <a class="nav-link" href={{ path('signup') }}>Sign Up</a>
-                    </li>
+                <li class="nav-item ms-3">
+                    <a class="btn btn-black btn-rounded" href="{{ path('login') }}">Login</a>
+                </li>
+                <li class="nav-item ms-3">
+                    <a class="btn btn-black btn-rounded" href="{{ path('signup') }}">Sign up</a>
+                </li>
                 {% endif %}
             </ul>
         </div>

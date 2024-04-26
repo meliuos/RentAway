@@ -1,6 +1,10 @@
 
 {% extends 'base.html.twig' %}
 
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/SignIn.css') }}">
+{% endblock %}
+
 {% block title %}Sign Up{% endblock %}
 
 {% block body %}
@@ -8,7 +12,7 @@
 
     {% for message in app.session.flashBag.get('error') %}
         <div class="alert alert-danger">
-            {{ meesage }}
+            {{ message }}
         </div>
     {% endfor %}
 
