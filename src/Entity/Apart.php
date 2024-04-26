@@ -23,19 +23,19 @@ class Apart
     #[ORM\Column]
     private ?float $price = null;
 
-    #[ORM\Column(length: 255)]
+    #[ORM\Column(name:'coverImg',length: 255)]
     private ?string $coverImg = null;
 
     #[ORM\Column]
     private ?float $rating = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'reviewCount')]
     private ?int $reviewCount = null;
 
     #[ORM\Column(length: 255)]
     private ?string $location = null;
 
-    #[ORM\Column]
+    #[ORM\Column(name: 'openSpots')]
     private ?int $openSpots = null;
 
     #[ORM\Column(length: 50)]

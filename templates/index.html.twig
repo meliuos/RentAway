@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Home{% endblock %}
+
+{% block body %}
+{% include 'navbar.html.twig' %}
+{% include 'hero.html.twig' %}
+
+{% for apart in aparts %}
+{% set badgeText = (apart.openSpots > 0) ? 'Available now!' : 'Not Available!' %}
+    {% include 'card.html.twig' with {
+        'id': apart.id,
+        'title': apart.title,
+        'description': apart.description,
+        'price': apart.price,
+        'coverImg': apart.coverImg,
+        'rating': apart.rating,
+        'reviewCount': apart.reviewCount,
+        'location': apart.location,
+        'openSpots': apart.openSpots,
+        'badgeText': badgeText
+    } %}
+{% endfor %}
+{% endblock %}

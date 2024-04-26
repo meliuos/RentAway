@@ -1,0 +1,18 @@
+<div class="card" id="{{ id }}">
+    {% if badgeText %}
+        <div class="card--badge">{{ badgeText }}</div>
+    {% endif %}
+    <img 
+        src="{{ coverImg }}" 
+        class="card--image" 
+    />
+    <div class="card--stats">
+        <span>{{ rating }}</span>
+        <span class="gray">({{ reviewCount }}) • </span>
+        <span class="gray">{{ location }}</span>
+    </div>
+    <p class="card--title">{{ title }}</p>
+    <p class="card--price">
+        <span class="bold">From ${{ price }}</span> / night
+    </p>
+</div>
