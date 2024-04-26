@@ -1,0 +1,11 @@
+.email {
+    width: 50%;
+    margin: 0 auto;
+}
+button {
+    cursor: pointer;
+    padding: 10px 20px;
+    background-color: white;
+    border: 1px solid black;
+    margin: 10px;
+}
