@@ -15,7 +15,7 @@
     {% endfor %}
     {% for message in app.session.flashBag.get('error') %}
         <div class="alert alert-danger">
-            {{ meesage }}
+            {{ message }}
         </div>
     {% endfor %}
 
