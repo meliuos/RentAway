@@ -7,29 +7,30 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav">
                 <li class="nav-item">
-                    {% if app.session.get('username') is defined %}
+                    {% if session.get('username') %}
                     <a class="nav-link" href="/post">Rent your House</a>
                     {% else %}
-                <a class="nav-link" href="{{ path('login') }}">Rent your House</a>
+                <a class="nav-link" href={{ path('login') }}>Rent your House</a>
                     {% endif %}
                 </li>
-                {% if app.session.get('role') == "admin" %}
+                {% if session.get('role') == "admin" %}
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ path('admin') }}">Admin Dashboard</a>
+                    <a class="nav-link" href={{ path('admin') }}>Admin Dashboard</a>
                 </li>
                 {% endif %}
                 <li class="nav-item">
-                    <a class="nav-link" href="/edit">Manage your posts</a>
+                    <a class="nav-link" href="{{path("edit")}}">Manage your posts</a>
                 </li>
             </ul>
             <ul class="navbar-nav ms-auto">
-                {% if app.session.get('user') is defined %}
+                {% if session.get('username') %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('logout') }}">Logout</a>
+                        <a class="nav-link" href={{ path('logout') }}>Logout</a>
                     </li>
                 {% else %}
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('login') }}">Login</a>
+                        <a class="nav-link" href={{ path('login') }}>Login</a>
+                         <a class="nav-link" href={{ path('signup') }}>Sign Up</a>
                     </li>
                 {% endif %}
             </ul>

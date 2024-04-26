@@ -20,6 +20,8 @@ class HomeController extends AbstractController{
     public function index(SessionInterface $session): Response
     {
         $session->start();
+        $session->get('authenticated');
+        $session->get('user');
         return $this->render('navbar.html.twig',[
             'session' => $session
         ]);

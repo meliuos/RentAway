@@ -16,20 +16,19 @@ class AuthController extends AbstractController
         if ($request->isMethod('POST')) {
             $username = $request->request->get('username');
             $password = $request->request->get('password');
-            $admin = $request->request->get('isAdmin');
+            $admin = $request->request->get('role');
             
             // Check if username and password are valid (example)
             if ($username === 'admin' && $password === 'password') {
-                $request->getSession()->set('authenticated', true);
-                $request->getSession()->set('user', ['username' => $username, 'role' => 'admin']);
-
+                $request->getSession()->set('username',$username);
+                $request->getSession()->set('role',$admin);
+                // Redirect to homepage
                 return $this->redirectToRoute('');
             } else {
                 // Invalid credentials
                 $this->addFlash('error', 'Invalid username or password.');
             }
         }
-
         return $this->render('login.html.twig');
     }
     #[Route('/logout', name: 'logout')]
@@ -37,7 +36,6 @@ class AuthController extends AbstractController
     {
         // Clear session variables
         $request->getSession()->clear();
-
         return $this->redirectToRoute('');
     }
 }

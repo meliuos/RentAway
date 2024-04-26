@@ -10,6 +10,15 @@ login:
 logout:
     path: /logout
     controller: App\Controller\AuthController::logout
+post:
+    path: /post
+    controller: App\Controller\PostController::index
+edit:
+    path: /edit
+    controller: App\Controller\PostController::edit
+signup:
+    path: /signup
+    controller: App\Controller\AuthController::signup
 kernel:
     resource: ../src/Kernel.php
     type: annotation
