@@ -8,14 +8,14 @@
 
     {% if app.flashes('error') %}
         <div class="alert alert-danger" role="alert">
-            {{ app.flashes('error')[0] }}
+             {{ dump(app.flashes()) }}
         </div>
     {% endif %}
 
     <form method="post">
         <div class="mb-3">
             <label for="username" class="form-label">Email</label>
-            <input type="email" class="form-control" id="username" name="username">
+            <input type="email" class="form-control" id="username" name="mail">
         </div>
         <div class="mb-3">
             <label for="password" class="form-label">Password</label>

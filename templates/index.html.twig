@@ -1,11 +1,18 @@
 {% extends 'base.html.twig' %}
+ 
+{% block stylesheets %}
+<link rel="stylesheet" href="css/card.css">
+{% endblock %}
+ 
+{% block javascripts %}
+{% endblock %}
 
 {% block title %}Home{% endblock %}
 
 {% block body %}
 {% include 'navbar.html.twig' %}
 {% include 'hero.html.twig' %}
-
+<div class="cards-list" id='cards-list'>
 {% for apart in aparts %}
 {% set badgeText = (apart.openSpots > 0) ? 'Available now!' : 'Not Available!' %}
     {% include 'card.html.twig' with {
@@ -21,4 +28,5 @@
         'badgeText': badgeText
     } %}
 {% endfor %}
+</div>
 {% endblock %}
