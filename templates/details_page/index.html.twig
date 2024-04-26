@@ -1,0 +1,18 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/DetailsPage.css') }}"
+{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div>
+            <img src="{{apart.coverImg}}" alt="{{apart.title}}" class="image" />
+            <h2 class="title">{{apart.title}}</h2>
+            <p class="description">{{apart.description}}</p>
+            <p class="price">Price: {{apart.price}} €/night</p>
+            <div class="button-container">
+                <button class="button" >Contact via Email</button>
+            </div>
+        </div>
+    </div>
+{% endblock %}

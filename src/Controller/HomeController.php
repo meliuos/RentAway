@@ -12,11 +12,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use App\Repository\ApartRepository;
 
-
-/*
-     * @Route("/", name="HomeController")
-*/
-
+#[Route('/', name: 'HomeController')]
 class HomeController extends AbstractController{
     public function index(SessionInterface $session,ApartRepository $apartRepository): Response
     {

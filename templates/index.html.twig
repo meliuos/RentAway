@@ -4,8 +4,6 @@
     <link rel="stylesheet" href={{ asset('css/card.css') }}>
     <link rel="stylesheet" href={{ asset('css/Hero.css') }}>
     <link rel="stylesheet" href={{ asset('css/style.css') }}>
-    <link rel="stylesheet" href={{ asset('css/navbar.css') }}>
-    <link rel="stylesheet" href={{ asset('node_modules/bootstrap/dist/css/bootstrap.css') }}>
 {% endblock %}
  
 {% block javascripts %}
@@ -14,10 +12,10 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-{% include 'navbar.html.twig' %}
 {% include 'hero.html.twig' %}
-<div class="cards-list" id='cards-list'>
+<div id='cards-list' class="cards-list">
 {% for apart in aparts %}
+<a style="text-decoration: none" href="{{ path('app_details_page',{id: apart.id}) }}"><div id='cards-list' class="cards-list">
 {% set badgeText = (apart.openSpots > 0) ? 'Available now!' : 'Not Available!' %}
     {% include 'card.html.twig' with {
         'id': apart.id,
@@ -31,6 +29,8 @@
         'openSpots': apart.openSpots,
         'badgeText': badgeText
     } %}
+</div></a>
 {% endfor %}
 </div>
+
 {% endblock %}
