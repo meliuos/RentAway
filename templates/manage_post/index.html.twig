@@ -3,5 +3,33 @@
 {% block title %}ManagePost{% endblock %}
 
 {% block body %}
-
+<table>
+    <thead>
+    <tr>
+        <th>Title</th>
+        <th>Description</th>
+        <th>Price</th>
+        <th>Image Link</th>
+        <th>Location</th>
+        <th>Open spots</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for post in posts %}
+        <tr>
+            <td>{{ post.title }}</td>
+            <td>{{ post.description }}</td>
+            <td>{{ post.price }}</td>
+            <td>{{ post.imageLink }}</td>
+            <td>{{ post.location }}</td>
+            <td>{{ post.openSpots }}</td>
+            <td>
+                <a href="{{ path('app_details_page', {'id': post.id}) }}">show</a>
+                <a href="{{ path('', {'id': post.id}) }}">edit</a>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
