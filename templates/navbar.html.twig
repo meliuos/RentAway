@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg fixed-top bg-light navbar-light">
     <div class="container-fluid">
-        <a class="navbar-brand nav-logo" href="#">RentAway</a>
+        <a class="navbar-brand nav-logo" href="{{path('HomeController') }}">RentAway</a>
         <button
                 class="navbar-toggler"
                 type="button"
@@ -14,7 +14,7 @@
             <ul class="navbar-nav ms-auto align-items-center">
                 <li class="nav-item">
                     {% if app.session.get('username') %}
-                    <a class="nav-link mx-2" href="/post">Rent your house</a>
+                    <a class="nav-link mx-2" href="{{ path('app_rent') }}">Rent your house</a>
                     {% else %}
                     <a class="nav-link mx-2" href={{ path('login') }}>Rent your house</a>
                     {% endif %}
@@ -25,7 +25,11 @@
                     {% endif %}
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link mx-2" href="{{path("edit")}}">Manage your posts</a>
+                    {% if app.session.get('username') %}
+                    <a class="nav-link mx-2" href="{{path("app_manage_post")}}">Manage your posts</a>
+                    {% else %}
+                    <a class="nav-link mx-2" href="{{path('login')}}">Manage your posts</a>
+                    {% endif %}
                 </li>
 
                 {% if app.session.get('username') %}
