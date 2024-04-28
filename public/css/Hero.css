@@ -1,4 +1,4 @@
-* {
+*{
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
@@ -9,7 +9,7 @@ body {
 
 .hero {
     position: relative;
-    height: 70dvh;
+    height: 90dvh;
     display: flex;
     justify-content: center;
     align-items: center;
