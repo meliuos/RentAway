@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('css/Post.css') }}">
+{% endblock %}
+
+{% block title %}RentYourHouse{% endblock %}
+
+{% block body %}
+    <div class='post'>
+        <div>
+            <h2>Please Enter the information below:</h2>
+        </div>
+        <div>
+            <form>
+                <label>
+                    Title:
+                    <input type="text" name="title" value="" />
+                </label>
+                <br />
+                <label>
+                    Description:
+                    <input type="text" name="description" value="" />
+                </label>
+                <br />
+                <label>
+                    Price:
+                    <input type="number" name="price" value="" />
+                </label>
+                <br />
+                <label>
+                    Image Link:
+                    <input type="text" name="coverImg" value={houseDetails.coverImg} />
+                </label>
+                <br />
+                <label>
+                    Location:
+                    <input type="text" name="location" value={houseDetails.location} />
+                </label>
+                <br />
+                <label>
+                    Open spots:
+                    <input type="number" name="openSpots" value="" />
+                </label>
+                <button class='sub' type="submit">Submit</button>
+            </form>
+        </div>
+    </div>
+{% endblock %}

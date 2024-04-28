@@ -1,0 +1,39 @@
+.post{
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 20px;
+
+}
+div h2{
+    text-align: center;
+}
+
+
+label{
+    font-size: 1.2rem;
+    margin: 10px;
+    width: 200px;
+}
+input{
+    width: 90%;
+    height: 30px;
+    margin: 10px;
+    padding: 5px;
+    font-size: 1rem;
+}
+
+.sub {
+    padding: 10px 20px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.sub:hover {
+    background-color: #0056b3;
+}
