@@ -51,7 +51,7 @@ class AuthController extends AbstractController
     {
         // Check if the form is submitted
         if ($request->isMethod('POST')) {
-            $mail = $request->request->get('mail');
+            $mail = $request->request->get('email');
             $password = $request->request->get('password');
             
             // Check if user with the same email already exists
@@ -64,7 +64,7 @@ class AuthController extends AbstractController
             // Create new user entity
             $user = new Users();
             $user->setMail($mail);
-            $user->setPassword(password_hash($password, PASSWORD_DEFAULT));
+            $user->setPassword($password);
             $user->setAdmin(false); // Set admin flag as needed
             
             // Save user to database
@@ -85,7 +85,7 @@ class AuthController extends AbstractController
     // Helper method to set user session
     private function setUserSession(Request $request, Users $user): void
     {
-        $request->getSession()->set('username', $user->getMail());
+        $request->getSession()->set('email', $user->getMail());
         $request->getSession()->set('admin', $user->isAdmin());
     }
 }

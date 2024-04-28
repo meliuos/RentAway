@@ -19,6 +19,15 @@ edit:
 signup:
     path: /signup
     controller: App\Controller\AuthController::signup
+contact:
+    path: /contact/{id}
+    controller: App\Controller\DetailsPageController::contacter
+send_email:
+    path: /send_email
+    controller: App\Controller\DetailsPageController::sendEmail
+admin:
+    path: /admin
+    controller: App\Controller\AdminController::index
 kernel:
     resource: ../src/Kernel.php
     type: annotation

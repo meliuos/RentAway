@@ -6,12 +6,17 @@
 {% block body %}
     <div class="container">
         <div>
+        {% if message is defined %}
+            {{ message }}
+        {% endif %}
+        </div>
+        <div class="{{apart.id}}">
             <img src="{{apart.coverImg}}" alt="{{apart.title}}" class="image" />
             <h2 class="title">{{apart.title}}</h2>
             <p class="description">{{apart.description}}</p>
             <p class="price">Price: {{apart.price}} €/night</p>
             <div class="button-container">
-                <button class="button" >Contact via Email</button>
+                <a href="{{path('contact',{'id':apart.id})}}" class="button" >Contact via Email</a>
             </div>
         </div>
     </div>

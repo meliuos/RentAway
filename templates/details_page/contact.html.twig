@@ -1,0 +1,24 @@
+    {% extends 'base.html.twig' %}
+    {% block title %}
+        Contact
+    {% endblock %}
+
+    {% block body %}
+    <div class="container mt-5 pt-5 d-flex flex-column justify-content-centre align-items-center ">
+    
+    <form action="{{ path('send_email') }}" method="post">
+    <input type="hidden" name="id" value="{{ id }}">
+    <div class="mb-3">
+        <label class="form-label" for="object">Object :</label>
+        <input class="form-control" type="text" name="object" placeholder="Email Subject" required>
+    </div>
+    <div class="mb-3">
+    <label class="form-label" for="message">Message :</label>
+    <textarea class="form-control" name="message" placeholder="Email Message" required></textarea>
+    </div>
+    
+    <button class="btn btn-primary" type="submit">Send Email</button>
+    </form>
+    
+    </div>
+    {% endblock %}  
