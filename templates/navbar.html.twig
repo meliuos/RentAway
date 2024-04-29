@@ -27,8 +27,6 @@
                 <li class="nav-item">
                     {% if app.session.has('email') %}
                     <a class="nav-link mx-2" href="{{path("app_manage_post")}}">Manage your posts</a>
-                    {% else %}
-                    <a class="nav-link mx-2" href="{{path('login')}}">Manage your posts</a>
                     {% endif %}
                 </li>
 

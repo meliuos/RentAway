@@ -40,22 +40,29 @@ public function contacter($id, ApartRepository $apartRepository): Response
     ]);
 }
     #[Route('/send_email', name: 'send_email')]
-    public function sendEmail( Request $request, MailerInterface $mailer, ApartRepository $apartRepository): Response
+    public function sendEmail(Request $request, MailerInterface $mailer, ApartRepository $apartRepository): Response
     {
         $id = $request->request->get('id');
         $apart = $apartRepository->find($id);
-
+    
         if (!$apart) {
             throw $this->createNotFoundException('Apart not found');
         }
-
+    
         if ($request->isMethod('POST')) {
+            // Check if the "email" session variable is set
+            $senderEmail = $request->getSession()->get('email');
+            if (!$senderEmail) {
+                // Redirect with an error message if the sender email is not set
+                return $this->redirectToRoute('app_details_page', ['message' => 'Email not sent: Sender email not set', 'id' => $id]);
+            }
+    
             $email = (new Email())
-                ->from($request->getSession()->get("email"))
+                ->from($senderEmail)
                 ->to($apart->getMail())
-                ->subject($request->request->get('object'))
+                ->subject($request->request->get('subject'))
                 ->text($request->request->get('message'));
-
+    
             try {
                 $mailer->send($email);
                 return $this->redirectToRoute('app_details_page', ['message' => 'Email sent successfully', 'id' => $id]);
@@ -63,7 +70,7 @@ public function contacter($id, ApartRepository $apartRepository): Response
                 return $this->redirectToRoute('app_details_page', ['message' => 'Email not sent', 'id' => $id]);
             }
         }
-
+    
         // Handle GET requests or invalid POST requests
         return $this->redirectToRoute('app_details_page', ['id' => $id]);
     }
