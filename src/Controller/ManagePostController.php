@@ -15,7 +15,7 @@ class ManagePostController extends AbstractController
     public function index(SessionInterface $session,ApartRepository $apartRepository): Response
     {
         $session->start();
-        if($session->get('email') == null || $session->get('admin') != '1')
+        if($session->get('email') == null )
         {
             return $this->redirectToRoute('login');
         }
