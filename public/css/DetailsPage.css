@@ -1,3 +1,12 @@
+body {
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .container {
     max-width: 600px;
     margin: 10px auto;

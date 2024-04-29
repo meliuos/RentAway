@@ -13,8 +13,8 @@
         <div>
             <form>
                 <label>
-                    Title:
-                    <input type="text" name="title" value="" />
+                    Title *:
+                    <input type="text" name="title" value="" required/>
                 </label>
                 <br />
                 <label>
@@ -23,23 +23,23 @@
                 </label>
                 <br />
                 <label>
-                    Price:
-                    <input type="number" name="price" value="" />
+                    Price *:
+                    <input type="number" name="price" value="" required/>
                 </label>
                 <br />
                 <label>
-                    Image Link:
-                    <input type="text" name="coverImg" value={houseDetails.coverImg} />
+                    Image Link *:
+                    <input type="text" name="coverImg" value=""  required/>
                 </label>
                 <br />
                 <label>
-                    Location:
-                    <input type="text" name="location" value={houseDetails.location} />
+                    Location *:
+                    <input type="text" name="location" value="" required/>
                 </label>
                 <br />
                 <label>
-                    Open spots:
-                    <input type="number" name="openSpots" value="" />
+                    Open spots *:
+                    <input type="number" name="openSpots" value="" required/>
                 </label>
                 <button class='sub' type="submit">Submit</button>
             </form>
