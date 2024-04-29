@@ -12,11 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class ManagePostController extends AbstractController
 {
     #[Route('/edit', name: 'app_manage_post')]
-    public function index(SessionInterface $session,ApartRepository $apartRepository,Apart $appart): Response
+    public function index(SessionInterface $session,ApartRepository $apartRepository): Response
     {
         $session->start();
         $email=$session->get('email');
-        $aparts = $apartRepository->findBy($email);
+        $aparts = $apartRepository->findBy(['mail' => $email]);
         return $this->render('manage_post/index.html.twig', [
             'aparts' => $aparts,
         ]);

@@ -26,7 +26,7 @@
             <td>{{ post.openSpots }}</td>
             <td>
                 <a href="{{ path('app_details_page', {'id': post.id}) }}">show</a>
-                <a href="{{ path('', {'id': post.id}) }}">edit</a>
+                {# <a href="{{ path('', {'id': post.id}) }}">edit</a> #}
             </td>
         </tr>
     {% endfor %}
