@@ -8,7 +8,7 @@
 {% block title %}Home{% endblock %}
 
 {% block body %}
-{% include 'hero.html.twig' %}}
+{% include 'hero.html.twig' %}
 <div id='cards-list' class="cards-list">
 {% for apart in aparts %}
 <a style="text-decoration: none" href="{{ path('app_details_page',{id: apart.id}) }}"><div id='cards-list' class="cards-list">
