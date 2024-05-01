@@ -3,5 +3,23 @@
 {% block title %}AdminDashboard{% endblock %}
 
 {% block body %}
-{# manage users #}
+    <table class="table table-bordered">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Mail</th>
+            <th scope="col">Admin</th>
+            <th scope="col">Actions</th>
+        </tr>
+        {% for user in users %}
+            <tr>
+                <td>{{ user.id }}</td>
+                <td>{{ user.mail }}</td>
+                <td>{{ user.admin ? 'yes' : 'no' }}</td>
+                <td>
+                    <a href="{{ path('admin', {'id': user.id}) }}">Edit</a>
+                    <a href="{{ path('admin', {'id': user.id}) }}">Delete</a>
+                </td>
+            </tr>
+        {% endfor %}
+    </table>
 {% endblock %}

@@ -5,21 +5,23 @@
     <link rel="stylesheet" href="{{ asset('css/userDashboard.css') }}">
 {% endblock %}
 {% block body %}
-<table>
+<table class="table table-bordered">
     <thead>
     <tr>
-        <th>Title</th>
-        <th>Description</th>
-        <th>Price</th>
-        <th>Image Link</th>
-        <th>Location</th>
-        <th>Open spots</th>
-        <th>Actions</th>
+        <th scope="col">#</th>
+        <th scope="col">Title</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Image Link</th>
+        <th scope="col">Location</th>
+        <th scope="col">Open spots</th>
+        <th scope="col">Actions</th>
     </tr>
     </thead>
     <tbody>
     {% for post in aparts %}
         <tr>
+            <th scope="row">{{ post.id }}</th>
             <td>{{ post.title }}</td>
             <td>{{ post.description }}</td>
             <td>{{ post.price }}</td>
