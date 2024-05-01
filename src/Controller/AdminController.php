@@ -12,7 +12,7 @@ class AdminController extends AbstractController
     #[Route('/admin', name: 'admin')]
     public function index(Request $request): Response
     {
-        if(($request->getSession()->get('email') == null) || ($request->getSession()->get('amin') != '1'))
+        if(($request->getSession()->get('email') == null) || ($request->getSession()->get('admin') == false))
         {
             return $this->redirectToRoute('HomeController');
         }
