@@ -14,11 +14,12 @@ use Symfony\Component\HttpFoundation\Request;
 class DetailsPageController extends AbstractController
 {
     #[Route('/details/{id}', name: 'app_details_page')]
-    public function index($id,ApartRepository $apartRepository): Response
+    public function index($id,ApartRepository $apartRepository,Request $request): Response
     {
         $apart = $apartRepository->find($id);
         return $this->render('details_page/index.html.twig', [
-            'apart' => $apart
+            'apart' => $apart,
+            'message' => $request->query->get('message')
         ]);
     }
     #[Route('/contact/{id}', name: 'contact')]
@@ -33,7 +34,6 @@ public function contacter($id, ApartRepository $apartRepository): Response
     
     // Access the getMail() function on the $apart object
     $email = $apart->getMail();
-    
     return $this->render('details_page/contact.html.twig', [
         'email' => $email,
         'id' => $id
@@ -58,9 +58,9 @@ public function contacter($id, ApartRepository $apartRepository): Response
             }
     
             $email = (new Email())
-                ->from($senderEmail)
-                ->to($apart->getMail())
-                ->subject($request->request->get('subject'))
+                ->from("admin@demomailtrap.com")
+                ->to("tazou1999blackshot@gmail.com")
+                ->subject($request->request->get('object'))
                 ->text($request->request->get('message'));
     
             try {
