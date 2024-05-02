@@ -12,11 +12,9 @@ use Symfony\Component\HttpFoundation\Request;
 class AdminController extends AbstractController
 {
     #[Route('/admin', name: 'admin')]
-    public function index(SessionInterface $session,UsersRepository $usersRepository): Response
+    public function index(SessionInterface $session,UsersRepository $usersRepository,Request $request): Response
     {
-        $session->start();
-        $email=$session->get('email');
-        if($email== null )
+        if(($request->getSession()->get('email') == null) || ($request->getSession()->get('admin') != true))
         {
             return $this->redirectToRoute('login');
         }

@@ -20,6 +20,6 @@ class ApartRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Apart::class);
     }
-
     
+
 }

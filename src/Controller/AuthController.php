@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\Persistence\ManagerRegistry;
 
 class AuthController extends AbstractController
 {
@@ -47,7 +49,7 @@ class AuthController extends AbstractController
     }
     
     #[Route('/signup', name: 'signup')]
-    public function signup(Request $request, UsersRepository $usersRepository): Response
+    public function signup(Request $request, UsersRepository $usersRepository,EntityManagerInterface $entityManager): Response
     {
         // Check if the form is submitted
         if ($request->isMethod('POST')) {
@@ -68,7 +70,6 @@ class AuthController extends AbstractController
             $user->setAdmin(false); // Set admin flag as needed
             
             // Save user to database
-            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($user);
             $entityManager->flush();
             
