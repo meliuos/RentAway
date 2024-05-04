@@ -49,45 +49,4 @@ class RentController extends AbstractController
         ]);
     }
 
-    #[Route('/edit/update/{id}', name: 'update_post')]
-    public function update(Request $request, EntityManagerInterface $entityManager, ApartRepository $apartRepository, $id): Response
-    {
-        if($request->getSession()->get('email') == null)
-        {
-            return $this->redirectToRoute('login');
-        }
-
-        $post = $apartRepository->find($id);
-
-        if(!$post) {
-            throw $this->createNotFoundException('The post does not exist');
-        }
-
-        if($request->isMethod("POST")){
-            $title = $request->request->get("title");
-            $description = $request->request->get("description");
-            $price = $request->request->get("price");
-            $coverImg = $request->request->get("coverImg");
-            $location = $request->request->get("location");
-            $openSpots = $request->request->get("openSpots");
-
-            $post->setTitle($title);
-            $post->setDescription($description);
-            $post->setPrice($price);
-            $post->setCoverImg($coverImg);
-            $post->setLocation($location);
-            $post->setOpenSpots($openSpots);
-
-            $entityManager->persist($post);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('app_rent');
-        }
-
-        return $this->render('/manage_post/update.html.twig', [
-            'controller_name' => 'RentController',
-            'post' => $post,
-        ]);
-    }
-
 }
