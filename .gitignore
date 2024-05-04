@@ -26,3 +26,5 @@ npm-debug.log
 yarn-error.log
 /public/node_modules/
 ###< symfony/webpack-encore-bundle ###
+/yarn.lock
+/public/yarn.lock
