@@ -8,6 +8,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Doctrine\ORM\EntityManagerInterface;
+
 
 class AdminController extends AbstractController
 {
@@ -38,7 +40,7 @@ class AdminController extends AbstractController
         return $this->redirectToRoute('admin');
     }
     #[Route('/admin/addAdmin',name:'addAdmin')]
-    public function addAdmin(UsersRepository $usersRepository,SessionInterface $session,Request $request): Response
+    public function addAdmin(UsersRepository $usersRepository,SessionInterface $session,Request $request,EntityManagerInterface $entityManager): Response
     {
         $session->start();
         if($session->get('admin') != true)
@@ -50,6 +52,18 @@ class AdminController extends AbstractController
             $email = $request->request->get('email');
             $password = $request->request->get('password');
             $user = new Users();
+            $user->setMail($email);
+            $user->setPassword($password);
+            $user->setAdmin(true);
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+            return $this->redirectToRoute('addAdmin');
         }
+        return $this->render('admin/registerAdmin.html.twig');
+    }
+    #[Route('/admin/managePost',name:'managePost')]
+    public function managePost(){
+
     }
 }
