@@ -28,6 +28,13 @@ send_email:
 admin:
     path: /admin
     controller: App\Controller\AdminController::index
+addAdmin:
+    path: /admin/addAdmin
+    controller: App\Controller\AdminController::addAdmin
+managePost:
+    path: /admin/managePost
+    controller: App\Controller\AdminController::managePost
+
 kernel:
     resource: ../src/Kernel.php
     type: annotation

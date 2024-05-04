@@ -3,6 +3,17 @@
 {% block title %}AdminDashboard{% endblock %}
 
 {% block body %}
+    {% block sidebar %}
+    <div class="navbar">
+     <ul>
+        <li><a href="{{ path('admin') }}">Manage user's accounts</a></li>
+        <li><a href="{{ path('managePost') }}">Manage user's Posts</a></li>
+        <li><a href="{{ path('addAdmin') }}">Add an admin</a></li>
+    </ul>
+    </div>
+    {% endblock %}
+    {% block content %}
+     <div>
     <table class="table table-bordered">
         <tr>
             <th scope="col">#</th>
@@ -17,9 +28,15 @@
                 <td>{{ user.admin ? 'yes' : 'no' }}</td>
                 <td>
                     <a href="{{ path('admin', {'id': user.id}) }}">Edit</a>
-                    <a href="{{ path('admin', {'id': user.id}) }}">Delete</a>
+                    {% if user.admin != true %}
+                        <a href="{{ path('admin', {'id': user.id}) }}">Delete</a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
     </table>
+    </div> 
+    {% endblock %}
+   
+    
 {% endblock %}

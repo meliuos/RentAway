@@ -13,7 +13,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class DetailsPageController extends AbstractController
 {
-    #[Route('/details/{id}', name: 'app_details_page')]
+    #[Route('/details/{id<\d+>}', name: 'app_details_page')]
     public function index($id,ApartRepository $apartRepository,Request $request): Response
     {
         $apart = $apartRepository->find($id);
@@ -22,7 +22,7 @@ class DetailsPageController extends AbstractController
             'message' => $request->query->get('message')
         ]);
     }
-    #[Route('/contact/{id}', name: 'contact')]
+    #[Route('/contact/{id<\d+>}', name: 'contact')]
 public function contacter($id, ApartRepository $apartRepository): Response
 {
     $apart = $apartRepository->find($id);

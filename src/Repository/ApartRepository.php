@@ -20,6 +20,15 @@ class ApartRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, Apart::class);
     }
-    
+    public function findByIdAndEmail($id,$email){
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.id = :id')
+            ->andWhere('a.mail = :email')
+            ->setParameter('id', $id)
+            ->setParameter('email', $email)
+            ->getQuery()
+            ->getOneOrNullResult()
+        ;
+    }
 
 }

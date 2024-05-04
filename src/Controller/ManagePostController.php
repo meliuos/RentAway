@@ -28,9 +28,10 @@ class ManagePostController extends AbstractController
         ]);
     }
     #[Route('/edit/delete/{id<\d+>}', name: 'delete_post')]
-    public function delete(ApartRepository $apartRepository,$id,ManagerRegistry $doctrine): RedirectResponse
+    public function delete(ApartRepository $apartRepository,$id,ManagerRegistry $doctrine,SessionInterface $session): RedirectResponse
     {
-        $apart = $apartRepository->find($id);
+        $session->start();
+        $apart = $apartRepository->findByIdAndEmail($id,$session->get('email'));
         $entityManager = $doctrine->getManager();
         $entityManager->remove($apart);
         $entityManager->flush();
