@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Update Post{% endblock %}
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('css/userDashboard.css') }}">
+{% endblock %}
+{% block body %}
+    <form method="post">
+        <label for="title">Title:</label><br>
+        <input type="text" id="title" name="title" value="{{ post.title }}"><br><br>
+        <label for="description">Description:</label><br>
+        <textarea id="description" name="description">{{ post.description }}</textarea><br><br>
+        <label for="price">Price:</label><br>
+        <input type="text" id="price" name="price" value="{{ post.price }}"><br><br>
+        <label for="coverImg">Image Link:</label><br>
+        <input type="text" id="coverImg" name="coverImg" value="{{ post.coverImg }}"><br><br>
+        <label for="location">Location:</label><br>
+        <input type="text" id="location" name="location" value="{{ post.location }}"><br><br>
+        <label for="openSpots">Open Spots:</label><br>
+        <input type="text" id="openSpots" name="openSpots" value="{{ post.openSpots }}"><br><br>
+        <input type="submit" value="Update">
+    </form>
+{% endblock %}
+

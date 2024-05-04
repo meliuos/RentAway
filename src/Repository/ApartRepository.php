@@ -32,3 +32,5 @@ class ApartRepository extends ServiceEntityRepository
     }
 
 }
+
+
