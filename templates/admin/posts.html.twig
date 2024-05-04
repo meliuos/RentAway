@@ -1,5 +1,5 @@
 {% extends 'admin/index.html.twig' %}
 
 {% block content %}
-    
+{% include 'cards.html.twig' with {'aparts':aparts,'admin':true} %}
 {% endblock %}
