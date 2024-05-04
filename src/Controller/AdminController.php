@@ -3,6 +3,8 @@
 namespace App\Controller;
 use App\Entity\Users;
 use App\Repository\UsersRepository;
+use App\Repository\ApartRepository;
+use App\Entity\Apart;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -63,7 +65,15 @@ class AdminController extends AbstractController
         return $this->render('admin/registerAdmin.html.twig');
     }
     #[Route('/admin/managePost',name:'managePost')]
-    public function managePost(){
-
+    public function managePost(ApartRepository $aparts,SessionInterface $session,Request $request): Response{
+        if(($request->getSession()->get('email') == null) || ($request->getSession()->get('admin') != true))
+        {
+            return $this->redirectToRoute('login');
+        }
+        //DELETE POST IF THE FORM IS SUBMITTED
+        $aparts = $aparts->findAll();
+        return $this->render('admin/posts.html.twig', [
+            'aparts' => $aparts,
+        ]);
     }
 }

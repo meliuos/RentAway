@@ -16,6 +16,10 @@ class AuthController extends AbstractController
     #[Route('/login', name: 'login')]
     public function login(Request $request, UsersRepository $usersRepository): Response
     {
+        if($request->getSession()->get('email') != null)
+        {
+            return $this->redirectToRoute('HomeController');
+        }
         // Check if the form is submitted
         if ($request->isMethod('POST')) {
             $mail = $request->request->get('mail');
