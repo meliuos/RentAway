@@ -8,7 +8,8 @@
 
 <div id='cards-list' class="cards-list">
 {% for apart in aparts %}
-<a style="text-decoration: none" href="{{ path('app_details_page',{id: apart.id}) }}"><div id='cards-list' class="cards-list">
+<div class="carta">
+<a style="text-decoration: none" href="{{ path('app_details_page',{id: apart.id}) }}">
 {% set badgeText = (apart.openSpots > 0) ? 'Available now!' : 'Not Available!' %}
     {% include 'card.html.twig' with {
         'id': apart.id,
@@ -23,13 +24,11 @@
         'badgeText': badgeText
     } %}
     <div>
-                <a href="{{ path('app_details_page', {'id': apart.id}) }}">show</a>
-                <a href="{{ path('update_post', {'id': apart.id}) }}">edit</a>
-                <a href="{{ path('delete_post', {'id': apart.id}) }}">delete</a>
+                <a class="btn btn-primary" href="{{ path('update_post', {'id': apart.id}) }}">edit</a>
+                <a class="btn btn-primary" href="{{ path('delete_post', {'id': apart.id}) }}">delete</a>
     </div>
-   
-</div></a>
- 
+  </a>
+  </div>
 {% endfor %}              
                 
 {% endblock %}

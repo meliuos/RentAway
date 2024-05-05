@@ -5,7 +5,11 @@
 
 {% block body %}
     <div class="container">
-        
+        <div class="alert">
+        {% if message is defined %}
+        <div class="alert alert-primary text-center" style="margin-bottom:10px ;">
+            {{ message }}
+        </div>
         <div class="{{apart.id}}">
             <img src="{{apart.coverImg}}" alt="{{apart.title}}" class="image" />
             <h2 class="title">{{apart.title}}</h2>
@@ -14,11 +18,6 @@
             <div class="button-container">
                 <a style="text-decoration: none"  href="{{path('contact',{'id':apart.id})}}" class="btn" >Contact via Email</a>
             </div>
-        </div>
-        <div class="alert">
-        {% if message is defined %}
-        <div class="alert alert-primary" style="margin-bottom: 0;">
-            {{ message }}
         </div>
         {% endif %}
         </div>
