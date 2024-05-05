@@ -28,15 +28,15 @@
                 <li class="nav-item">
                     <a class="nav-link mx-2" href="{{path("app_manage_post")}}">Manage your posts</a>
                 </li>
-                <li class="nav-item ms-3 btn-primary">
-                    <a class="btn btn-black btn-rounded" href="{{ path('logout') }}">Logout</a>
+                <li class="nav-item ms-3 ">
+                    <a class="nav-link mx-2" href="{{ path('logout') }}">Logout</a>
                 </li>
                 {% else %}
-                <li class="nav-item ms-3 btn-primary">
-                    <a class="btn btn-black btn-rounded" href="{{ path('login') }}">Login</a>
+                <li class="nav-item ms-3 ">
+                    <a class="nav-link mx-2" href="{{ path('login') }}">Login</a>
                 </li>
-                <li class="nav-item ms-3 btn-primary">
-                    <a class="btn btn-black btn-rounded" href="{{ path('signup') }}">Sign up</a>
+                <li class="nav-item ms-3 ">
+                    <a class="nav-link mx-2" href="{{ path('signup') }}">Sign up</a>
                 </li>
                 {% endif %}
             </ul>

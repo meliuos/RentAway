@@ -8,6 +8,7 @@
 {% block title %}Sign Up{% endblock %}
 
 {% block body %}
+    <div class="container">
     <h1>Sign Up</h1>
 
     {% for message in app.session.flashBag.get('error') %}
@@ -17,14 +18,18 @@
     {% endfor %}
 
     <form method="post" action="{{path('signup')}}">
-        <div class="mb-3">
+        <div class="mb-3 input-box">
             <label for="username" class="form-label">Email</label>
             <input type="email" class="form-control" id="username" name="email">
         </div>
-        <div class="mb-3">
+        <div class="mb-3 input-box">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password">
         </div>
-        <button type="submit" class="btn btn-primary">Sign up</button>
+        <button type="submit" class="btn ">Sign up</button>
     </form>
+        <div class="form-group text-center register-link">
+            <span class="signup">You already have an account? <a href="{{path('login')}}">Sign in now!</a></span>
+        </div>
+    </div>
 {% endblock %}

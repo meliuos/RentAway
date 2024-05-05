@@ -20,7 +20,10 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "bootstrap": "^5.3.3",
+        "jquery": "^3.7.1",
         "node.js": "^0.0.1-security",
+        "popper.js": "^1.16.1",
         "yarn": "^1.22.22"
     }
 }

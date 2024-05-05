@@ -7,29 +7,30 @@
 {% block title %}Login{% endblock %}
 
 {% block body %}
-    <div class="container">
+    <div class="container ">
     <h1>Login</h1>
-    {% for message in app.session.flashBag.get('info') %}
-        <div class="alert alert-info">
-            {{ message }}
-        </div>
-    {% endfor %}
     {% for message in app.session.flashBag.get('error') %}
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" style="margin-bottom: 0;">
             {{ message }}
         </div>
     {% endfor %}
 
-    <form  method="post">
-        <div class="mb-3">
+    <form  method="post" style="margin-top:0; ">
+        <div class="mb-3 input-box">
             <label for="username" class="form-label">Email</label>
             <input type="email" class="form-control" id="username" name="mail">
         </div>
-        <div class="mb-3">
+        <div class="mb-3 input-box">
             <label for="password" class="form-label">Password</label>
             <input type="password" class="form-control" id="password" name="password">
         </div>
-        <button type="submit" class="btn btn-primary">Login</button>
+        <button type="submit" class="btn ">Login</button>
     </form>
+        <div class="form-group text-center register-link">
+            <span class="signup">Don't have an account? <a href="{{path('signup')}}">Sign up now!</a></span>
+        </div>
+
     </div>
 {% endblock %}
+
+
