@@ -3,6 +3,7 @@
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 60px;
     text-align: center;
+    background-color: rgba(5, 29, 82, 0.96);
 }
 .choice {
     flex: 1;
@@ -14,6 +15,8 @@
     color: white;
 }
 .choice:hover {
-    background-color: #1a1a1a;
+    background-color: #100f0f;
 }
-
+.choice:target {
+    background-color: black;
+}

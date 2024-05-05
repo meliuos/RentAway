@@ -1,22 +1,24 @@
 <div id='cards-list' class="cards-list" style="background-color:white;">
 {% for apart in aparts %}
-<a style="text-decoration: none" href="{{ path('app_details_page',{id: apart.id}) }}"><div id='cards-list' class="cards-list">
-{% set badgeText = (apart.openSpots > 0) ? 'Available now!' : 'Not Available!' %}
-    {% include 'card.html.twig' with {
-        'id': apart.id,
-        'title': apart.title,
-        'description': apart.description,
-        'price': apart.price,
-        'coverImg': apart.coverImg,
-        'rating': apart.rating,
-        'reviewCount': apart.reviewCount,
-        'location': apart.location,
-        'openSpots': apart.openSpots,
-        'badgeText': badgeText
-    } %}
-    {% if admin == true %}
-        <a href="{{path("managePost")}}">Delete</a>
-    {% endif %}
-</div></a>
+<a style="text-decoration: none" href="{{ path('app_details_page',{id: apart.id}) }}">
+        <div id='cards-list' class="cards-list">
+        {% set badgeText = (apart.openSpots > 0) ? 'Available now!' : 'Not Available!' %}
+            {% include 'card.html.twig' with {
+                'id': apart.id,
+                'title': apart.title,
+                'description': apart.description,
+                'price': apart.price,
+                'coverImg': apart.coverImg,
+                'rating': apart.rating,
+                'reviewCount': apart.reviewCount,
+                'location': apart.location,
+                'openSpots': apart.openSpots,
+                'badgeText': badgeText }
+            %}
+        {% if admin == true %}
+                <a href="{{path("managePost")}}">Delete</a>
+        {% endif %}
+        </div>
+</a>
 {% endfor %}
 </div>
