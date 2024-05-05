@@ -1,0 +1,19 @@
+.parent {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 60px;
+    text-align: center;
+}
+.choice {
+    flex: 1;
+    text-decoration: none;
+    outline-color: transparent;
+    text-align: center;
+    line-height: 3;
+    font-size: large;
+    color: white;
+}
+.choice:hover {
+    background-color: #1a1a1a;
+}
+
