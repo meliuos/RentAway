@@ -1,24 +1,53 @@
-    {% extends 'base.html.twig' %}
-    {% block title %}
-        Contact
-    {% endblock %}
+{% extends 'base.html.twig' %}
+{% block title %}
+    Contact
+{% endblock %}
 
-    {% block body %}
-    <div class="container mt-5 pt-5 d-flex flex-column justify-content-centre align-items-center ">
-    
-    <form action="{{ path('send_email') }}" method="post">
-    <input type="hidden" name="id" value="{{ id }}">
-    <div class="mb-3">
-        <label class="form-label" for="object">Object :</label>
-        <input class="form-control" type="text" name="object" placeholder="Email Subject" required>
+{% block body %}
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/SignIn.css') }}">
+    <style>
+        body {
+            background-image: url("{{ img }}");
+            object-fit: fill;
+            background-size: cover;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    </style>
+
+    <div class="container mt-5 pt-5 d-flex flex-column justify-content-centre align-items-center" style="width: 60%; height: 80%; margin-top: 10px;">
+        <form action="{{ path('send_email') }}" method="post">
+            <input type="hidden" style="margin-top:0; margin-bottom: 0;" name="id" value="{{ id }}">
+            <div class="row">
+                <div class="col input-box">
+                    <label class="form-label" for="name">Your name:</label>
+                    <input class="form-control" id="name" type="text" name="name" placeholder="Name" required>
+                </div>
+                <div class="col input-box">
+                    <label class="form-label" for="email">Your E-mail Address:</label>
+                    <input class="form-control" id="email" type="text" name="email" placeholder="Email address" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 input-box">
+                    <label class="form-label" for="object">Object:</label>
+                    <input class="form-control" id="object" type="text" name="object" value="RentAway: Renting {{ title }}" placeholder="E-mail object" required>
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3" style="width: 100%; margin-top:30px ; margin-bottom: 0px;">
+                    <label class="form-label" for="message" style="margin-top:20px;">Message:</label>
+                    <textarea id="message" class="form-control text-area" name="message" placeholder="Email Message"  style="margin-bottom: 0px; color: black;" required></textarea>
+                </div>
+            </div>
+            <div class="row" style="width: 100%; margin-top: 0; margin-bottom: 30px;">
+                <div class="mb-3" >
+                    <button class="btn" type="submit">Send Email</button>
+                </div>
+            </div>
+        </form>
     </div>
-    <div class="mb-3">
-    <label class="form-label" for="message">Message :</label>
-    <textarea class="form-control" name="message" placeholder="Email Message" required></textarea>
-    </div>
-    
-    <button class="btn btn-primary" type="submit">Send Email</button>
-    </form>
-    
-    </div>
-    {% endblock %}  
+{% endblock %}
+
+
