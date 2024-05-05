@@ -1,0 +1,20 @@
+{% extends 'admin/index.html.twig' %}
+
+{% block content %}
+
+
+    <div class="container" >
+        <form method="POST">
+            <h1 style="font-size: 26px;">Edit Admin info</h1>
+            <div class="mb-3 input-box">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="mail" name="email" required>
+            </div>
+            <div class="mb-3 input-box">
+                <label for="password" class="form-label">Admin</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <button type="submit" class="btn ">Register</button>
+        </form>
+    </div>
+{% endblock %}

@@ -38,3 +38,7 @@ managePost:
 kernel:
     resource: ../src/Kernel.php
     type: annotation
+
+admin_edit:
+    path: /admin/edit/{id}
+    controller: App\Controller\AdminController::edit

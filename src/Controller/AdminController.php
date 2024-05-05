@@ -53,6 +53,14 @@ class AdminController extends AbstractController
         {
             $email = $request->request->get('email');
             $password = $request->request->get('password');
+
+            //*** Check if user with the same email already exists
+            $existingUser = $usersRepository->findOneBy(['mail' => $email]);
+            if ($existingUser) {
+                $this->addFlash('error', 'User with this email already exists.');
+                return $this->redirectToRoute('signup');
+            }
+
             $user = new Users();
             $user->setMail($email);
             $user->setPassword($password);
@@ -76,4 +84,34 @@ class AdminController extends AbstractController
             'aparts' => $aparts,
         ]);
     }
+
+    #[Route('/admin/edit/{id}', name: 'edit_user')]
+public function edit(Request $request, $id): Response
+{
+    $entityManager = $this->getDoctrine()->getManager();
+    $user = $entityManager->getRepository(User::class)->find($id);
+
+    if (!$user) {
+        throw $this->createNotFoundException('User not found');
+    }
+
+    if ($request->isMethod('POST')) {
+        $user->setUsername($request->request->get('username'));
+        $user->setEmail($request->request->get('email'));
+
+        // Add more fields as needed
+
+        $entityManager->flush();
+
+        return $this->redirectToRoute('admin');
+    }
+
+    return $this->render('admin/edit.html.twig', [
+        'user' => $user,
+    ]);
+}
+
+
+
+
 }
