@@ -9,22 +9,22 @@
 
 {% block body %}
     <div class="container">
-    <h1>Sign Up</h1>
+    <h1 style="font-size: 36px;">Sign Up</h1>
 
     {% for message in app.session.flashBag.get('error') %}
-        <div class="alert alert-danger">
+        <div class="alert alert-danger" style="margin-top: 0;">
             {{ message }}
         </div>
     {% endfor %}
 
-    <form method="post" action="{{path('signup')}}">
+    <form method="post" action="{{path('signup')}}" style="margin-top: 0px;">
         <div class="mb-3 input-box">
             <label for="username" class="form-label">Email</label>
-            <input type="email" class="form-control" id="username" name="email">
+            <input type="email" class="form-control" id="username" name="email" required>
         </div>
         <div class="mb-3 input-box">
             <label for="password" class="form-label">Password</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control" id="password" name="password" required>
         </div>
         <button type="submit" class="btn ">Sign up</button>
     </form>

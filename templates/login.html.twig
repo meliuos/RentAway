@@ -8,7 +8,7 @@
 
 {% block body %}
     <div class="container ">
-    <h1>Login</h1>
+      <h1 style="font-size: 36px;">Login</h1>
     {% for message in app.session.flashBag.get('error') %}
         <div class="alert alert-danger" style="margin-bottom: 0;">
             {{ message }}

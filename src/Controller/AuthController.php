@@ -51,42 +51,42 @@ class AuthController extends AbstractController
         $request->getSession()->clear();
         return $this->redirectToRoute('HomeController');
     }
-    
+
     #[Route('/signup', name: 'signup')]
-    public function signup(Request $request, UsersRepository $usersRepository,EntityManagerInterface $entityManager): Response
+    public function signup(Request $request, UsersRepository $usersRepository, EntityManagerInterface $entityManager): Response
     {
         // Check if the form is submitted
         if ($request->isMethod('POST')) {
             $mail = $request->request->get('email');
             $password = $request->request->get('password');
-            
-            // Check if user with the same email already exists
+
+            //*** Check if user with the same email already exists
             $existingUser = $usersRepository->findOneBy(['mail' => $mail]);
             if ($existingUser) {
                 $this->addFlash('error', 'User with this email already exists.');
                 return $this->redirectToRoute('signup');
             }
-            
+
             // Create new user entity
             $user = new Users();
             $user->setMail($mail);
             $user->setPassword($password);
             $user->setAdmin(false); // Set admin flag as needed
-            
+
             // Save user to database
             $entityManager->persist($user);
             $entityManager->flush();
-            
+
             // Set user session
             $this->setUserSession($request, $user);
-            
+
             // Redirect to homepage
             return $this->redirectToRoute('HomeController');
         }
-        
+
         return $this->render('signup.html.twig');
     }
-    
+
     // Helper method to set user session
     private function setUserSession(Request $request, Users $user): void
     {

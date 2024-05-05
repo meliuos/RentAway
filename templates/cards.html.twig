@@ -1,4 +1,4 @@
-<div id='cards-list' class="cards-list">
+<div id='cards-list' class="cards-list" style="background-color:white;">
 {% for apart in aparts %}
 <a style="text-decoration: none" href="{{ path('app_details_page',{id: apart.id}) }}"><div id='cards-list' class="cards-list">
 {% set badgeText = (apart.openSpots > 0) ? 'Available now!' : 'Not Available!' %}
