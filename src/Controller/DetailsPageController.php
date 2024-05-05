@@ -78,7 +78,6 @@ public function contacter($id, ApartRepository $apartRepository): Response
 
         }
 
-        // Handle GET requests or invalid POST requests
         return $this->redirectToRoute('app_details_page', ['id' => $id]);
     }
 }
