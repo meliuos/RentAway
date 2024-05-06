@@ -1,42 +1,66 @@
 {% extends 'base.html.twig' %}
 
 {% block title %}Update Post{% endblock %}
-{% block stylesheet %}
+{% block stylesheets %}
+    {{ parent() }}
     <link rel="stylesheet" href="{{ asset('css/userDashboard.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/SignIn.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 {% endblock %}
+
 {% block body %}
-    <div class="container">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
+    <div class="container" style="width: 70%; height:120%;">
+        <h1 style="font-size: 36px;">Update your post!</h1>
+        {% for message in app.session.flashBag.get('error') %}
+            <div class="alert alert-danger" style="margin-bottom: 0;">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.session.flashBag.get('successerror') %}
+            <div class="alert alert-success" style="margin-bottom: 0;">
+                {{ message }}
+            </div>
+        {% endfor %}
                 <form method="post">
-                    <div class="form-group">
-                        <label for="title">Title:</label>
+                    <div class="row">
+                        <div class="col input-box">
+                        <label for="title" class="form-label">Title:</label>
                         <input type="text" class="form-control" id="title" name="title" value="{{ post.title }}">
+                        </div>
+                        <div class="col input-box">
+                            <label for="price" class="form-label">Price:</label>
+                            <input type="number" class="form-control " id="price" name="price" value="{{ post.price }}">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="description">Description:</label>
-                        <textarea class="form-control" id="description" name="description">{{ post.description }}</textarea>
+
+                    <div class="row">
+                        <div class="col input-box">
+                            <label for="location" class="form-label">Location:</label>
+                            <input type="text" class="form-control" id="location" name="location" value="{{ post.location }}">
+                        </div>
+
+                        <div class="col input-box">
+                            <label for="openSpots" class="form-label">Open Spots:</label>
+                            <input type="number" class="form-control" id="openSpots" name="openSpots" value="{{ post.openSpots }}">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="price">Price:</label>
-                        <input type="text" class="form-control" id="price" name="price" value="{{ post.price }}">
+                    <div class="row">
+                        <div class="mb-3 input-box " style="margin-bottom: 20px;">
+                            <label for="coverImg" class="form-label">Image Link:</label>
+                            <input type="text" class="form-control" id="coverImg" name="coverImg" value="{{ post.coverImg }}">
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="coverImg">Image Link:</label>
-                        <input type="text" class="form-control" id="coverImg" name="coverImg" value="{{ post.coverImg }}">
+
+                    <div class="row" >
+                        <div class="mb-3 input-box" style="height: 230px;">
+                                <label for="description" class="form-label" >Description:</label>
+                                <textarea class="form-control text-area" id="description" name="description">{{ post.description }}</textarea>
+                        </div>
                     </div>
-                    <div class="form-group">
-                        <label for="location">Location:</label>
-                        <input type="text" class="form-control" id="location" name="location" value="{{ post.location }}">
+                    <div class="row">
+                        <button type="submit" class="mybtn">Update</button>
                     </div>
-                    <div class="form-group">
-                        <label for="openSpots">Open Spots:</label>
-                        <input type="text" class="form-control" id="openSpots" name="openSpots" value="{{ post.openSpots }}">
-                    </div>
-                    <button type="submit" class="btn mybtn">Update</button>
                 </form>
             </div>
-        </div>
-    </div>
 {% endblock %}
 

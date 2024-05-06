@@ -14,20 +14,20 @@ use Doctrine\Persistence\ManagerRegistry;
 class RentController extends AbstractController
 {
     #[Route('/post', name: 'app_rent')]
-    public function index(Request $request,EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
-        if($request->getSession()->get('email') == null)
-        {
+        if ($request->getSession()->get('email') == null) {
             return $this->redirectToRoute('login');
         }
-        if($request->isMethod("POST")){
-            
-            $title=$request->request->get("title");
-            $description=$request->request->get("description");
-            $price=$request->request->get("price");
-            $coverImg=$request->request->get("coverImg");
-            $location=$request->request->get("location");
-            $openSpots=$request->request->get("openSpots");
+
+        if ($request->isMethod("POST")) {
+            $title = $request->request->get("title");
+            $description = $request->request->get("description");
+            $price = $request->request->get("price");
+            $coverImg = $request->request->get("coverImg");
+            $location = $request->request->get("location");
+            $openSpots = $request->request->get("openSpots");
+
             $apart = new Apart();
             $apart->setTitle($title);
             $apart->setDescription($description);
@@ -38,15 +38,19 @@ class RentController extends AbstractController
             $apart->setReviewCount(0);
             $apart->setRating(5);
             $apart->setMail($request->getSession()->get('email'));
+
             $entityManager->persist($apart);
             $entityManager->flush();
 
-            return $this->redirectToRoute('HomeController');
+            $this->addFlash('success', 'Post added successfully.');
 
+            return $this->redirectToRoute('app_manage_post');
         }
+
         return $this->render('rent/index.html.twig', [
             'controller_name' => 'RentController',
         ]);
     }
+
 
 }

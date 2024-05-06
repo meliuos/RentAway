@@ -38,8 +38,6 @@ class ManagePostController extends AbstractController
         $email = $session->get('email');
         $isAdmin = $session->get('admin');
 
-        $apart = $apartRepository->findByIdAndEmail($id, $email);
-
         if ($isAdmin) {
             $apart = $apartRepository->find($id);
             if (!$apart) {
@@ -61,13 +59,18 @@ class ManagePostController extends AbstractController
         $entityManager->remove($apart);
         $entityManager->flush();
         $this->addFlash('success', 'Post deleted successfully.');
-        if($isAdmin){
-            return $this->redirectToRoute('manage_post');
-        }
-        else{
-        return $this->redirectToRoute('app_manage_post');
-    }}
+        if ($isAdmin && $email == $apart->getMail()) {
+            return $this->redirectToRoute('app_manage_post');
+        } else {
+            if  ($isAdmin && $email != $apart->getMail())
+            {
+                return $this->redirectToRoute('managePost');
 
+            } else {
+                return $this->redirectToRoute('app_manage_post');
+            }
+        }
+    }
 
     #[Route('/edit/update/{id}', name: 'update_post')]
     public function update(Request $request, EntityManagerInterface $entityManager, ApartRepository $apartRepository, $id): Response

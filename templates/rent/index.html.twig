@@ -1,48 +1,73 @@
 {% extends 'base.html.twig' %}
+
 {% block stylesheets %}
     <link rel="stylesheet" href="{{ asset('css/Post.css') }}">
+
+{{ parent() }}
+<link rel="stylesheet" href="{{ asset('css/userDashboard.css') }}">
+<link rel="stylesheet" href="{{ asset('css/SignIn.css') }}">
+<link rel="stylesheet" href="{{ asset('css/styles.css') }}">
 {% endblock %}
 
 {% block title %}RentYourHouse{% endblock %}
 
 {% block body %}
-    <div class='post'>
+    <div class='container' style="width: 70%; height:120%;">
         <div>
+            <h1 style="font-size: 36px;">Rent your house!</h1>
             <h2>Please Enter the information below:</h2>
         </div>
-        <div>
-            <form method="POST" >
-                <label class="form-label">
-                    Title :
-                    <input class="form-control" type="text" name="title" value="" required/>
-                </label>
-                <br />
-                <label class="form-label">
-                    Description:
-                    <input class="form-control" type="text" name="description" value="" />
-                </label>
-                <br />
-                <label class="form-label">
-                    Price :
-                    <input class="form-control" type="number" name="price" value="" required/>
-                </label>
-                <br />
-                <label class="form-label">
-                    Image Link :
-                    <input class="form-control" type="text" name="coverImg" value=""  required/>
-                </label>
-                <br />
-                <label class="form-label">
-                    Location :
-                    <input class="form-control" type="text" name="location" value="" required/>
-                </label>
-                <br />
-                <label class="form-label">
-                    Open spots :
-                    <input class="form-control" type="number" name="openSpots" value="" required/>
-                </label>
-                <button class='sub' type="submit">Submit</button>
-            </form>
-        </div>
+        {% for message in app.session.flashBag.get('error') %}
+            <div class="alert alert-danger" style="margin-bottom: 0;">
+                {{ message }}
+            </div>
+        {% endfor %}
+        {% for message in app.session.flashBag.get('successerror') %}
+            <div class="alert alert-success" style="margin-bottom: 0;">
+                {{ message }}
+            </div>
+        {% endfor %}
+        <form method="post">
+            <div class="row">
+                <div class="col input-box">
+                    <label for="title" class="form-label">Title:</label>
+                    <input type="text" class="form-control" id="title" name="title" placeholder="Enter title" >
+                </div>
+                <div class="col input-box">
+                    <label for="price" class="form-label">Price:</label>
+                    <input type="number" class="form-control " id="price" name="price" placeholder="Enter price" >
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col input-box">
+                    <label for="location" class="form-label">Location:</label>
+                    <input type="text" class="form-control" id="location" name="location" placeholder="Enter location" >
+                </div>
+
+                <div class="col input-box">
+                    <label for="openSpots" class="form-label">Open Spots:</label>
+                    <input type="number" class="form-control" id="openSpots" name="openSpots" placeholder="Enter open spots" >
+                </div>
+            </div>
+            <div class="row">
+                <div class="mb-3 input-box " style="margin-bottom: 20px;">
+                    <label for="coverImg" class="form-label">Image Link:</label>
+                    <input type="text" class="form-control" id="coverImg" name="coverImg" placeholder="Enter image link" >
+                </div>
+            </div>
+
+            <div class="row" >
+                <div class="mb-3 input-box" style="height: 230px;">
+                    <label for="description" class="form-label" >Description:</label>
+                    <textarea class="form-control text-area" id="description" name="description" placeholder="Enter description"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <button type="submit" class="mybtn" >Add</button>
+            </div>
+        </form>
+
     </div>
 {% endblock %}

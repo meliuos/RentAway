@@ -3,7 +3,14 @@
     <link rel="stylesheet" href="{{ asset('css/sidebar.css') }}">
     <link rel="stylesheet" href="{{ asset('css/card.css') }}">
 {% endblock %}
+
 {% block content %}
+    <style>
+        body{
+            background-image: none;
+            background-color: white;
+        }
+    </style>
     {% for message in app.flashes('success') %}
         {% if message is not null %}
             <div class="alert alert-success" role="alert">

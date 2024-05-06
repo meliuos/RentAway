@@ -31,6 +31,7 @@ admin:
 addAdmin:
     path: /admin/addAdmin
     controller: App\Controller\AdminController::addAdmin
+
 managePost:
     path: /admin/managePost
     controller: App\Controller\AdminController::managePost

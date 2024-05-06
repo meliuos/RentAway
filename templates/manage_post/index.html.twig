@@ -5,6 +5,12 @@
     <link rel="stylesheet" href={{ asset('css/card.css') }}>
 {% endblock %}
 {% block body %}
+    <style>
+        body{
+            background-color: white;
+             background-image: none;
+        }
+    </style>
     {% for message in app.flashes('success') %}
         {% if message is not null %}
             <div class="alert alert-success" role="alert">
