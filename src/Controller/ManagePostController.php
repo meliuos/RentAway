@@ -118,5 +118,50 @@ class ManagePostController extends AbstractController
             'post' => $post,
         ]);
     }
+    #[Route('/edit/add-spot/{id}', name: 'add_spot')]
+    public function addSpot(Request $request, EntityManagerInterface $entityManager, ApartRepository $apartRepository, $id): Response
+    {
+        $post = $apartRepository->find($id);
+
+        if (!$post) {
+            $this->addFlash('error', 'The post does not exist');
+            return $this->redirectToRoute('app_manage_post');
+        }
+
+        $post->setOpenSpots($post->getOpenSpots() + 1);
+
+        $entityManager->persist($post);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Spot added successfully.');
+        return $this->redirectToRoute('app_manage_post');
+    }
+
+    #[Route('/edit/remove-spot/{id}', name: 'remove_spot')]
+    public function removeSpot(Request $request, EntityManagerInterface $entityManager, ApartRepository $apartRepository, $id): Response
+    {
+        $post = $apartRepository->find($id);
+
+        if (!$post) {
+            $this->addFlash('error', 'The post does not exist');
+            return $this->redirectToRoute('app_manage_post');
+        }
+
+        if ($post->getOpenSpots() > 0) {
+
+            $post->setOpenSpots($post->getOpenSpots() - 1);
+
+            $entityManager->persist($post);
+            $entityManager->flush();
+
+
+            $this->addFlash('success', 'Spot removed successfully.');
+        } else {
+            $this->addFlash('error', 'No spots available to remove.');
+        }
+
+        return $this->redirectToRoute('app_manage_post');
+    }
+
 
 }
