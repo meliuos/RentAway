@@ -27,20 +27,34 @@ class AdminController extends AbstractController
             'users' => $users,
         ]);
     }
-    #[Route('/admin/delete/{id<\d+>}', name: 'delete_user')]
-    public function delete(UsersRepository $usersRepository,$id,SessionInterface $session): Response
+
+
+    #[Route('/admin/delete/{id}', name: 'delete_user')]
+
+    public function delete(Request $request, EntityManagerInterface $entityManager, UsersRepository $userRepository, $id): Response
     {
-        $session->start();
-        if($session->get('admin') != true)
+        if(($request->getSession()->get('email') == null) || ($request->getSession()->get('admin') != true))
         {
             return $this->redirectToRoute('login');
         }
-        $user = $usersRepository->find($id);
-        $entityManager = $this->getDoctrine()->getManager();
+        $user = $userRepository->find($id);
+
+        if (!$user) {
+            throw $this->createNotFoundException('User not found');
+        }
+
+        if ($user->isAdmin()) {
+            $this->addFlash('erroradmin', 'You cannot delete an admin user.');
+            return $this->redirectToRoute('admin');
+        }
+
         $entityManager->remove($user);
         $entityManager->flush();
+        $this->addFlash('success', 'User deleted successfully.');
         return $this->redirectToRoute('admin');
     }
+
+
     #[Route('/admin/addAdmin',name:'addAdmin')]
     public function addAdmin(UsersRepository $usersRepository,SessionInterface $session,Request $request,EntityManagerInterface $entityManager): Response
     {
@@ -86,32 +100,42 @@ class AdminController extends AbstractController
     }
 
     #[Route('/admin/edit/{id}', name: 'edit_user')]
-public function edit(Request $request, $id): Response
-{
-    $entityManager = $this->getDoctrine()->getManager();
-    $user = $entityManager->getRepository(User::class)->find($id);
+    public function edit(Request $request, EntityManagerInterface $entityManager, UsersRepository $userRepository, $id): Response
+    {
+        if(($request->getSession()->get('email') == null) || ($request->getSession()->get('admin') != true))
+        {
+            return $this->redirectToRoute('login');
+        }
+        $user = $userRepository->find($id);
 
-    if (!$user) {
-        throw $this->createNotFoundException('User not found');
+        if (!$user) {
+            throw $this->createNotFoundException('User not found');
+        }
+
+        if ($request->isMethod('POST')) {
+            $email = $request->request->get('email');
+            $password = $request->request->get('password');
+
+            $existingUser = $userRepository->findOneBy(['mail' => $email]);
+            if ($existingUser && $existingUser->getId() !== $user->getId()) {
+                $this->addFlash('error', 'Email is already in use.');
+                return $this->redirectToRoute('edit_user', ['id' => $id]);
+            }
+
+            $user->setMail($email);
+            if (!empty($password)) {
+
+                $user->setPassword($password);
+            }
+
+            $entityManager->flush();
+            $this->addFlash('success', 'User updated successfully.');
+            return $this->redirectToRoute('admin');
+        }
+
+        return $this->render('admin/edit.html.twig', [
+            'user' => $user,
+        ]);
     }
-
-    if ($request->isMethod('POST')) {
-        $user->setUsername($request->request->get('username'));
-        $user->setEmail($request->request->get('email'));
-
-        // Add more fields as needed
-
-        $entityManager->flush();
-
-        return $this->redirectToRoute('admin');
-    }
-
-    return $this->render('admin/edit.html.twig', [
-        'user' => $user,
-    ]);
-}
-
-
-
 
 }

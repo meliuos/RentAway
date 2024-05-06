@@ -18,6 +18,22 @@
             }
         </style>
         <div>
+
+            {% for message in app.flashes('success') %}
+                {% if message is not null %}
+                    <div class="alert alert-success" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
+
+            {% for message in app.flashes('erroradmin') %}
+                {% if message is not null %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ message }}
+                    </div>
+                {% endif %}
+            {% endfor %}
             <table class="table table-bordered">
                 <tr>
                     <th scope="col">#</th>
@@ -31,9 +47,9 @@
                         <td>{{ user.mail }}</td>
                         <td>{{ user.admin ? 'yes' : 'no' }}</td>
                         <td>
-                            <a class="btn btn-primary " style="width: 45%;" href="{{ path('admin', {'id': user.id}) }}">Edit</a>
+                            <a class="btn btn-primary " style="width: 45%;" href="{{ path('edit_user', {'id': user.id}) }}">Edit</a>
                             {% if user.admin != true %}
-                                <a class="btn btn-danger " style="width: 45%;" href="{{ path('admin', {'id': user.id}) }}">Delete</a>
+                                <a class="btn btn-danger " style="width: 45%;" href="{{ path('delete_user', {'id': user.id}) }}">Delete</a>
                             {% endif %}
                         </td>
                     </tr>

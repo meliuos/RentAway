@@ -42,3 +42,4 @@ kernel:
 admin_edit:
     path: /admin/edit/{id}
     controller: App\Controller\AdminController::edit
+    methods: ['GET', 'POST']

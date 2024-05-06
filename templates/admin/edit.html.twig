@@ -1,18 +1,32 @@
 {% extends 'admin/index.html.twig' %}
 
 {% block content %}
-    <div class="container" >
-        <form method="POST">
-            <h1 style="font-size: 26px;">Edit Admin info</h1>
+    <div class="container" style="height: 60%;" >
+        <h1 style="font-size: 30px;">
+            Edit Admin!
+        </h1>
+
+        {% for message in app.flashes('error') %}
+            {% if message is not null %}
+                <div class="alert alert-danger" role="alert">
+                    {{ message }}
+                </div>
+            {% endif %}
+        {% endfor %}
+
+
+        <form method="post" action="{{ path('admin_edit', {'id': user.id}) }}">
             <div class="mb-3 input-box">
-                <label for="email" class="form-label">Email</label>
-                <input type="email" class="form-control" id="mail" name="email" required>
+                <label for="email" class="form-label" >Email</label>
+                <input type="email" class="form-control" value="{{ user.mail }}" id="mail" name="email" required>
             </div>
             <div class="mb-3 input-box">
-                <label for="password" class="form-label">Admin</label>
+                <label for="password" class="form-label">Password</label>
                 <input type="password" class="form-control" id="password" name="password" required>
             </div>
             <button type="submit" class="btn mybtn ">Register</button>
         </form>
     </div>
+
 {% endblock %}
+
