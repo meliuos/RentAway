@@ -29,42 +29,63 @@ class ManagePostController extends AbstractController
             'aparts' => $aparts,
         ]);
     }
+
+
     #[Route('/edit/delete/{id<\d+>}', name: 'delete_post')]
     public function delete(ApartRepository $apartRepository, $id, ManagerRegistry $doctrine, SessionInterface $session): RedirectResponse
     {
         $session->start();
         $email = $session->get('email');
+        $isAdmin = $session->get('admin');
+
         $apart = $apartRepository->findByIdAndEmail($id, $email);
 
-        if (!$apart) {
-            throw $this->createNotFoundException('The post does not exist for the current user');
+        if ($isAdmin) {
+            $apart = $apartRepository->find($id);
+            if (!$apart) {
+                $this->addFlash('error', 'The post does not exist');
+                return $this->redirectToRoute('app_manage_post');
+            }
+        } else {
+            $apart = $apartRepository->findByIdAndEmail($id, $email);
+            if (!$apart) {
+                $this->addFlash('error', 'The post does not exist or you are not allowed to delete it');
+                return $this->redirectToRoute('app_manage_post');
+            }
         }
-
         $entityManager = $doctrine->getManager();
 
-        // Check if the entity is managed by Doctrine
         if (!$entityManager->contains($apart)) {
             throw new \Exception('The entity is not managed by Doctrine');
         }
-
         $entityManager->remove($apart);
         $entityManager->flush();
-
+        $this->addFlash('success', 'Post deleted successfully.');
+        if($isAdmin){
+            return $this->redirectToRoute('manage_post');
+        }
+        else{
         return $this->redirectToRoute('app_manage_post');
-    }
+    }}
+
 
     #[Route('/edit/update/{id}', name: 'update_post')]
     public function update(Request $request, EntityManagerInterface $entityManager, ApartRepository $apartRepository, $id): Response
     {
-        if($request->getSession()->get('email') == null)
-        {
-            return $this->redirectToRoute('login');
+        $session = $request->getSession();
+        $email = $session->get('email');
+        $isAdmin = $session->get('admin');
+
+        $post = $apartRepository->findByIdAndEmail($id, $email);
+
+        if (!$post) {
+            $this->addFlash('error', 'The post does not exist or you are not allowed to edit it');
+            return $this->redirectToRoute('app_manage_post');
         }
 
-        $post = $apartRepository->find($id);
-
-        if(!$post) {
-            throw $this->createNotFoundException('The post does not exist');
+        if (!$isAdmin && $post->getEmail() !== $email) {
+            $this->addFlash('error', 'You are not allowed to edit this post');
+            return $this->redirectToRoute('app_manage_post');
         }
 
         if($request->isMethod("POST")){
@@ -85,6 +106,7 @@ class ManagePostController extends AbstractController
             $entityManager->persist($post);
             $entityManager->flush();
 
+            $this->addFlash('success', 'Post updated successfully.');
             return $this->redirectToRoute('edit');
         }
 

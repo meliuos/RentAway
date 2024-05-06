@@ -4,5 +4,21 @@
     <link rel="stylesheet" href="{{ asset('css/card.css') }}">
 {% endblock %}
 {% block content %}
-{% include 'cards.html.twig' with {'aparts':aparts,'admin':true} %}
+    {% for message in app.flashes('success') %}
+        {% if message is not null %}
+            <div class="alert alert-success" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    {% for message in app.flashes('error') %}
+        {% if message is not null %}
+            <div class="alert alert-danger" role="alert">
+                {{ message }}
+            </div>
+        {% endif %}
+    {% endfor %}
+
+    {% include 'cards.html.twig' with {'aparts': aparts, 'admin': true} %}
 {% endblock %}

@@ -24,7 +24,7 @@
     {% endif %}
     {% if admin is defined and admin %}
         <div class="card--actions text-center" style="margin-bottom: 20px;">
-            <a class="btn btn-danger" style="width: 50%;"  href=" {{path("managePost")}}">Delete</a>
+            <a class="btn btn-danger" style="width: 50%;"  href="{{ path('delete_post',{'id':id}) }}">Delete</a>
         </div>
     {% endif %}
 </div>
