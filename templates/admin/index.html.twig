@@ -31,9 +31,9 @@
                         <td>{{ user.mail }}</td>
                         <td>{{ user.admin ? 'yes' : 'no' }}</td>
                         <td>
-                            <a href="{{ path('admin', {'id': user.id}) }}">Edit</a>
+                            <a class="btn btn-primary " style="width: 45%;" href="{{ path('admin', {'id': user.id}) }}">Edit</a>
                             {% if user.admin != true %}
-                                <a href="{{ path('admin', {'id': user.id}) }}">Delete</a>
+                                <a class="btn btn-danger " style="width: 45%;" href="{{ path('admin', {'id': user.id}) }}">Delete</a>
                             {% endif %}
                         </td>
                     </tr>

@@ -21,14 +21,11 @@
         'reviewCount': apart.reviewCount,
         'location': apart.location,
         'openSpots': apart.openSpots,
-        'badgeText': badgeText
+        'badgeText': badgeText,
+        'user': true
     } %}
-    <div>
-                <a class="btn btn-primary" href="{{ path('update_post', {'id': apart.id}) }}">edit</a>
-                <a class="btn btn-primary" href="{{ path('delete_post', {'id': apart.id}) }}">delete</a>
-    </div>
   </a>
   </div>
-{% endfor %}              
-                
+{% endfor %}
+
 {% endblock %}

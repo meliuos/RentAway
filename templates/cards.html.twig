@@ -13,11 +13,11 @@
                 'reviewCount': apart.reviewCount,
                 'location': apart.location,
                 'openSpots': apart.openSpots,
-                'badgeText': badgeText }
+                'badgeText': badgeText,
+                'admin':admin
+            }
             %}
-        {% if admin == true %}
-                <a href="{{path("managePost")}}">Delete</a>
-        {% endif %}
+
         </div>
 </a>
 {% endfor %}

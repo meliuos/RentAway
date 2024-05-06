@@ -2,10 +2,10 @@
     {% if badgeText %}
         <div class="card--badge">{{ badgeText }}</div>
     {% endif %}
-    <img 
-        src="{{ coverImg }}" 
-        class="card--image"
-        alt="{{ description }}"
+    <img
+            src="{{ coverImg }}"
+            class="card--image"
+            alt="{{ description }}"
     />
     <div class="card--stats">
         <span>{{ rating }}</span>
@@ -16,4 +16,15 @@
     <p class="card--price">
         <span class="bold">From ${{ price }}</span> / night
     </p>
+    {% if user is defined and user %}
+        <div class="card--actions text-center" style="margin-bottom: 20px;">
+            <a class="btn btn-primary" style="width: 40%;" href="{{ path('update_post', {'id': id}) }}">Edit</a>
+            <a class="btn btn-danger" style="width: 40%;"  href="{{ path('delete_post', {'id': id}) }}">Delete</a>
+        </div>
+    {% endif %}
+    {% if admin is defined and admin %}
+        <div class="card--actions text-center" style="margin-bottom: 20px;">
+            <a class="btn btn-danger" style="width: 50%;"  href=" {{path("managePost")}}">Delete</a>
+        </div>
+    {% endif %}
 </div>

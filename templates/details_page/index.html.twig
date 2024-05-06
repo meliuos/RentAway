@@ -5,21 +5,22 @@
 
 {% block body %}
     <div class="container">
+        {% if message is defined and message %}
         <div class="alert">
-        {% if message is defined %}
         <div class="alert alert-primary text-center" style="margin-bottom:10px ;">
             {{ message }}
         </div>
+            {% endif %}
         <div class="{{apart.id}}">
             <img src="{{apart.coverImg}}" alt="{{apart.title}}" class="image" />
             <h2 class="title">{{apart.title}}</h2>
             <p class="description">{{apart.description}}</p>
             <p class="price">Price: {{apart.price}} €/night</p>
             <div class="button-container">
-                <a style="text-decoration: none"  href="{{path('contact',{'id':apart.id})}}" class="btn" >Contact via Email</a>
+                <a style="text-decoration: none"  href="{{path('contact',{'id':apart.id})}}" class="btn mybtn" >Contact via Email</a>
             </div>
         </div>
-        {% endif %}
+
         </div>
     </div>
 {% endblock %}
